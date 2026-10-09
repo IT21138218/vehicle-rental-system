@@ -40,6 +40,12 @@ body {
     --bs-btn-active-border-color: var(--brand-dark);
 }
 
+.nav-pills {
+    --bs-nav-link-color: var(--brand);
+    --bs-nav-link-hover-color: var(--brand-dark);
+    --bs-nav-pills-link-active-bg: var(--brand);
+}
+
 .text-brand { color: var(--brand) !important; }
 .bg-brand-soft { background: var(--brand-soft) !important; }
 
