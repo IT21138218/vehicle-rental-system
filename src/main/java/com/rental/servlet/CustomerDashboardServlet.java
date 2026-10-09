@@ -1,6 +1,9 @@
 package com.rental.servlet;
 
+import com.rental.model.RentalStatus;
 import com.rental.model.User;
+import com.rental.service.RentalService;
+import com.rental.service.VehicleService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,6 +29,11 @@ public class CustomerDashboardServlet extends BaseServlet {
             redirect(request, response, user.getDashboardPath());
             return;
         }
+        RentalService rentalService = getService(RentalService.class);
+        request.setAttribute("activeRentalCount", rentalService.countForCustomer(user.getId(), RentalStatus.ACTIVE));
+        request.setAttribute("returnedRentalCount", rentalService.countForCustomer(user.getId(), RentalStatus.RETURNED));
+        request.setAttribute("activeRentals", rentalService.findForUser(user, RentalStatus.ACTIVE.name()));
+        request.setAttribute("vehiclesById", getService(VehicleService.class).findAllAsMap());
         render(request, response, "dashboard/customer-dashboard");
     }
 }
