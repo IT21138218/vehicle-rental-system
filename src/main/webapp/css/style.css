@@ -40,6 +40,12 @@ body {
     --bs-btn-active-border-color: var(--brand-dark);
 }
 
+.nav-pills {
+    --bs-nav-link-color: var(--brand);
+    --bs-nav-link-hover-color: var(--brand-dark);
+    --bs-nav-pills-link-active-bg: var(--brand);
+}
+
 .text-brand { color: var(--brand) !important; }
 .bg-brand-soft { background: var(--brand-soft) !important; }
 
@@ -74,7 +80,16 @@ a:hover { color: var(--brand-dark); }
 .app-navbar .nav-link {
     color: rgba(255, 255, 255, .72);
     border-radius: 8px;
-    padding: .45rem .8rem !important;
+    padding: .45rem .6rem !important;
+    white-space: nowrap; /* keep icon and label on one line */
+}
+
+/* Seven admin links + user menu: slightly smaller text on medium-large screens */
+@media (min-width: 992px) and (max-width: 1399.98px) {
+    .app-navbar .nav-link {
+        font-size: .9rem;
+        padding: .45rem .5rem !important;
+    }
 }
 
 .app-navbar .nav-link:hover,

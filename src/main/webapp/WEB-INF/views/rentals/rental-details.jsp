@@ -51,7 +51,7 @@
         </div>
     </div>
     <div class="col-lg-5">
-        <div class="card h-100">
+        <div class="card">
             <div class="card-header py-3"><i class="bi bi-cash-coin me-1"></i>Cost estimate</div>
             <div class="card-body">
                 <c:if test="${not empty vehicle}">

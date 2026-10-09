@@ -48,7 +48,7 @@
         </div>
     </div>
     <div class="col-lg-5">
-        <div class="card h-100">
+        <div class="card">
             <div class="card-header py-3"><i class="bi bi-cash-coin me-1"></i>Pricing</div>
             <div class="card-body p-4">
                 <div class="d-flex justify-content-between mb-2">
