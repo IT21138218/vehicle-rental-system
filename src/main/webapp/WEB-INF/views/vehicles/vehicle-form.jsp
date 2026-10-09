@@ -54,19 +54,22 @@
                         <div class="col-md-4">
                             <label for="year" class="form-label">Year</label>
                             <input type="number" class="form-control" id="year" name="year" required min="1990" step="1"
-                                   value="${fn:escapeXml(form.year)}">
+                                   placeholder="e.g. 2022" value="${fn:escapeXml(form.year)}">
                             <div class="invalid-feedback">Enter a year from 1990.</div>
                         </div>
                         <div class="col-md-4">
-                            <label for="baseDailyRate" class="form-label">Base daily rate (Rs.)</label>
-                            <input type="number" class="form-control" id="baseDailyRate" name="baseDailyRate" required
-                                   min="1" max="1000000" step="0.01" value="${fn:escapeXml(form.baseDailyRate)}">
-                            <div class="invalid-feedback">Rate must be greater than 0.</div>
+                            <label for="baseDailyRate" class="form-label">Base daily rate</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">Rs.</span>
+                                <input type="number" class="form-control" id="baseDailyRate" name="baseDailyRate" required
+                                       min="1" max="1000000" step="0.01" placeholder="8500.00" value="${fn:escapeXml(form.baseDailyRate)}">
+                                <div class="invalid-feedback">Rate must be greater than 0.</div>
+                            </div>
                         </div>
                         <div class="col-md-4">
                             <label for="spec" class="form-label" id="specLabel">Seats</label>
                             <input type="number" class="form-control" id="spec" name="spec" required step="1"
-                                   value="${fn:escapeXml(form.spec)}">
+                                   placeholder="e.g. 5" value="${fn:escapeXml(form.spec)}">
                             <div class="invalid-feedback" id="specFeedback">Value is out of range.</div>
                         </div>
                         <div class="col-12">
