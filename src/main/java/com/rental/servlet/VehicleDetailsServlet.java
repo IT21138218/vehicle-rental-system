@@ -1,6 +1,7 @@
 package com.rental.servlet;
 
 import com.rental.model.Vehicle;
+import com.rental.service.RentalService;
 import com.rental.service.VehicleService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,7 +12,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
- * GET /vehicles/view?id=V001 shows one vehicle with its price breakdown.
+ * GET /vehicles/view?id=V001 shows one vehicle with its price breakdown and booked dates.
  */
 @WebServlet("/vehicles/view")
 public class VehicleDetailsServlet extends BaseServlet {
@@ -27,6 +28,7 @@ public class VehicleDetailsServlet extends BaseServlet {
             return;
         }
         request.setAttribute("vehicle", vehicle.get());
+        request.setAttribute("upcoming", getService(RentalService.class).findUpcomingForVehicle(vehicle.get().getId()));
         render(request, response, "vehicles/vehicle-details");
     }
 }

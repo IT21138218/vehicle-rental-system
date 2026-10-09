@@ -49,6 +49,22 @@
             </div>
         </a>
     </div>
+    <div class="col-sm-6 col-xl-3">
+        <a href="${ctx}/rentals?status=ACTIVE" class="card stat-card h-100">
+            <div class="card-body d-flex align-items-center gap-3">
+                <span class="stat-icon"><i class="bi bi-calendar-check"></i></span>
+                <div><div class="stat-value">${activeRentalCount}</div><div class="stat-label">Active rentals</div></div>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <a href="${ctx}/rentals?status=RETURNED" class="card stat-card h-100">
+            <div class="card-body d-flex align-items-center gap-3">
+                <span class="stat-icon"><i class="bi bi-check2-all"></i></span>
+                <div><div class="stat-value">${returnedRentalCount}</div><div class="stat-label">Completed rentals</div></div>
+            </div>
+        </a>
+    </div>
 </div>
 
 <div class="card">
@@ -57,6 +73,7 @@
         <a href="${ctx}/admin/vehicles/add" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>Add vehicle</a>
         <a href="${ctx}/admin/users" class="btn btn-outline-primary"><i class="bi bi-people me-1"></i>Manage users</a>
         <a href="${ctx}/admin/vehicles" class="btn btn-outline-primary"><i class="bi bi-car-front me-1"></i>Manage fleet</a>
+        <a href="${ctx}/rentals" class="btn btn-outline-primary"><i class="bi bi-calendar-check me-1"></i>Manage rentals</a>
     </div>
 </div>
 

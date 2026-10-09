@@ -2,6 +2,8 @@ package com.rental.servlet;
 
 import com.rental.model.AdminUser;
 import com.rental.model.Customer;
+import com.rental.model.RentalStatus;
+import com.rental.service.RentalService;
 import com.rental.service.UserService;
 import com.rental.service.VehicleService;
 import jakarta.servlet.ServletException;
@@ -30,6 +32,10 @@ public class AdminDashboardServlet extends BaseServlet {
         request.setAttribute("vehicleCount", vehicleService.findAll().size());
         request.setAttribute("availableVehicleCount", vehicleService.countAvailable());
         request.setAttribute("vehicleTypeCounts", vehicleService.countByType());
+
+        RentalService rentalService = getService(RentalService.class);
+        request.setAttribute("activeRentalCount", rentalService.countByStatus(RentalStatus.ACTIVE));
+        request.setAttribute("returnedRentalCount", rentalService.countByStatus(RentalStatus.RETURNED));
         render(request, response, "dashboard/admin-dashboard");
     }
 }

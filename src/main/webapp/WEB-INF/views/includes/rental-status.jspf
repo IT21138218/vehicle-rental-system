@@ -1,0 +1,6 @@
+<%-- Coloured badge for a rental status. Set ${badgeStatus} (a RentalStatus) before including. --%>
+<c:choose>
+    <c:when test="${badgeStatus == 'ACTIVE'}"><span class="badge text-bg-primary">Active</span></c:when>
+    <c:when test="${badgeStatus == 'RETURNED'}"><span class="badge text-bg-success">Returned</span></c:when>
+    <c:otherwise><span class="badge text-bg-secondary">Cancelled</span></c:otherwise>
+</c:choose>

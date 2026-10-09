@@ -60,7 +60,26 @@
                     <span class="price fs-4 fw-bold text-brand">Rs. <fmt:formatNumber value="${vehicle.calculateDailyRate()}" pattern="#,##0.00"/></span>
                 </div>
                 <p class="small text-muted mt-3 mb-0">The daily rate includes the <c:out value="${fn:toLowerCase(vehicle.type)}"/> pricing rule.</p>
+                <c:if test="${vehicle.available}">
+                    <a href="${ctx}/rentals/new?vehicleId=${vehicle.id}" class="btn btn-primary w-100 mt-3">
+                        <i class="bi bi-calendar-plus me-1"></i>Book this vehicle</a>
+                </c:if>
             </div>
+        </div>
+        <div class="card mt-4">
+            <div class="card-header py-3"><i class="bi bi-calendar3 me-1"></i>Booked dates</div>
+            <c:choose>
+                <c:when test="${empty upcoming}">
+                    <div class="card-body small text-muted">No upcoming bookings.</div>
+                </c:when>
+                <c:otherwise>
+                    <ul class="list-group list-group-flush small">
+                        <c:forEach var="u" items="${upcoming}">
+                            <li class="list-group-item"><c:out value="${u.startDate}"/> &rarr; <c:out value="${u.endDate}"/></li>
+                        </c:forEach>
+                    </ul>
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>
 </div>
