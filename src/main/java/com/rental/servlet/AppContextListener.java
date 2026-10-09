@@ -2,8 +2,10 @@ package com.rental.servlet;
 
 import com.rental.repository.DataPaths;
 import com.rental.repository.UserRepository;
+import com.rental.repository.VehicleRepository;
 import com.rental.service.AuthService;
 import com.rental.service.UserService;
+import com.rental.service.VehicleService;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
@@ -41,10 +43,12 @@ public class AppContextListener implements ServletContextListener {
 
         // Repositories: the only objects that read/write files
         UserRepository userRepository = new UserRepository(dataFile(UserRepository.FILE_NAME));
+        VehicleRepository vehicleRepository = new VehicleRepository(dataFile(VehicleRepository.FILE_NAME));
 
         // Services: business rules, used by the servlets
         register(context, new AuthService(userRepository));
         register(context, new UserService(userRepository));
+        register(context, new VehicleService(vehicleRepository));
     }
 
     private static Path dataFile(String fileName) {
