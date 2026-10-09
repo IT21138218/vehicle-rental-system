@@ -42,6 +42,10 @@
                                 <a class="nav-link ${activeNav == 'reviews' ? 'active' : ''}" href="${ctx}/reviews">
                                     <i class="bi bi-chat-square-text me-1"></i>Reviews</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link ${activeNav == 'staff' ? 'active' : ''}" href="${ctx}/admin/staff">
+                                    <i class="bi bi-person-badge me-1"></i>Staff</a>
+                            </li>
                         </c:when>
                         <c:otherwise>
                             <li class="nav-item">
