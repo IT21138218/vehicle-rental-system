@@ -10,6 +10,12 @@
     <request-character-encoding>UTF-8</request-character-encoding>
     <response-character-encoding>UTF-8</response-character-encoding>
 
+    <!-- Locale for JSTL <fmt:formatNumber>, so amounts always show as 16,000.00 -->
+    <context-param>
+        <param-name>jakarta.servlet.jsp.jstl.fmt.locale</param-name>
+        <param-value>en_US</param-value>
+    </context-param>
+
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
