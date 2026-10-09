@@ -1,6 +1,7 @@
 package com.rental.servlet;
 
 import com.rental.model.Rental;
+import com.rental.service.PaymentService;
 import com.rental.service.RentalService;
 import com.rental.service.UserService;
 import com.rental.service.VehicleService;
@@ -33,6 +34,7 @@ public class RentalDetailsServlet extends BaseServlet {
         request.setAttribute("vehicle", getService(VehicleService.class).findById(rental.get().getVehicleId()).orElse(null));
         request.setAttribute("customer", getService(UserService.class).findById(rental.get().getCustomerId()).orElse(null));
         request.setAttribute("cost", rentalService.estimateCost(rental.get()));
+        request.setAttribute("payment", getService(PaymentService.class).findByRentalId(rental.get().getId()).orElse(null));
         render(request, response, "rentals/rental-details");
     }
 }
