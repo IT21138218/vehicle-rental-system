@@ -44,6 +44,25 @@ public abstract class Review implements Storable {
         setComment(comment);
     }
 
+    /**
+     * Factory method: creates the correct subclass for a review type.
+     *
+     * @param type "PUBLIC" or "VERIFIED"
+     * @return a PublicReview or a VerifiedReview
+     * @throws IllegalArgumentException for an unknown type
+     */
+    public static Review create(String type, String id, String vehicleId, String customerId,
+                                int rating, LocalDate date, String comment) {
+        switch (type == null ? "" : type.trim().toUpperCase()) {
+            case PublicReview.TYPE:
+                return new PublicReview(id, vehicleId, customerId, rating, date, comment);
+            case VerifiedReview.TYPE:
+                return new VerifiedReview(id, vehicleId, customerId, rating, date, comment);
+            default:
+                throw new IllegalArgumentException("Review type must be PUBLIC or VERIFIED");
+        }
+    }
+
     // ----- Abstract (polymorphic) methods -----
 
     /**
