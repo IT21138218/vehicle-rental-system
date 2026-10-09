@@ -65,6 +65,22 @@
             </div>
         </a>
     </div>
+    <div class="col-sm-6 col-xl-3">
+        <a href="${ctx}/payments?status=PAID" class="card stat-card h-100">
+            <div class="card-body d-flex align-items-center gap-3">
+                <span class="stat-icon"><i class="bi bi-cash-stack"></i></span>
+                <div><div class="stat-value fs-4">Rs. <fmt:formatNumber value="${paidTotal}" pattern="#,##0"/></div><div class="stat-label">Revenue collected</div></div>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <a href="${ctx}/payments?status=PENDING" class="card stat-card h-100">
+            <div class="card-body d-flex align-items-center gap-3">
+                <span class="stat-icon"><i class="bi bi-hourglass-split"></i></span>
+                <div><div class="stat-value fs-4">Rs. <fmt:formatNumber value="${unpaidTotal}" pattern="#,##0"/></div><div class="stat-label">Awaiting payment</div></div>
+            </div>
+        </a>
+    </div>
 </div>
 
 <div class="card">
@@ -74,6 +90,7 @@
         <a href="${ctx}/admin/users" class="btn btn-outline-primary"><i class="bi bi-people me-1"></i>Manage users</a>
         <a href="${ctx}/admin/vehicles" class="btn btn-outline-primary"><i class="bi bi-car-front me-1"></i>Manage fleet</a>
         <a href="${ctx}/rentals" class="btn btn-outline-primary"><i class="bi bi-calendar-check me-1"></i>Manage rentals</a>
+        <a href="${ctx}/admin/payments/generate" class="btn btn-outline-primary"><i class="bi bi-receipt me-1"></i>Generate bill</a>
     </div>
 </div>
 

@@ -57,6 +57,7 @@
     <div class="card-body d-flex flex-wrap gap-2">
         <a href="${ctx}/vehicles" class="btn btn-primary"><i class="bi bi-search me-1"></i>Browse vehicles</a>
         <a href="${ctx}/rentals" class="btn btn-outline-primary"><i class="bi bi-calendar-check me-1"></i>My rentals</a>
+        <a href="${ctx}/payments" class="btn btn-outline-primary"><i class="bi bi-receipt me-1"></i>My bills</a>
         <a href="${ctx}/profile" class="btn btn-outline-primary"><i class="bi bi-person-gear me-1"></i>Edit my profile</a>
     </div>
 </div>
