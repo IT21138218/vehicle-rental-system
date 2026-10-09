@@ -63,17 +63,21 @@ public abstract class AbstractFileRepository<T extends Storable> implements Repo
         return -1;
     }
 
-    /** {@inheritDoc} Malformed lines are skipped and a warning is logged. */
+    /**
+     * {@inheritDoc}
+     * Malformed lines are skipped and a warning is logged. Note: because every save
+     * rewrites the file from this list, a skipped line disappears on the next save.
+     */
     @Override
     public synchronized List<T> findAll() {
         List<T> items = new ArrayList<>();
-        int lineNumber = 0;
+        int recordNumber = 0;
         for (String line : fileHandler.readLines()) {
-            lineNumber++;
+            recordNumber++;
             try {
                 items.add(parse(line.split(Storable.SEPARATOR, splitLimit())));
             } catch (RuntimeException e) {
-                LOG.warning("Skipping malformed line " + lineNumber + " in "
+                LOG.warning("Skipping malformed record #" + recordNumber + " in "
                         + fileHandler.getFileName() + ": \"" + line + "\" (" + e.getMessage() + ")");
             }
         }
