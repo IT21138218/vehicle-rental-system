@@ -10,7 +10,10 @@ package com.rental.model;
  * </ul>
  */
 public enum PaymentStatus {
+    /** Bill created, waiting for payment. */
     PENDING,
+    /** Bill settled. */
     PAID,
+    /** Bill not paid in time. */
     OVERDUE
 }

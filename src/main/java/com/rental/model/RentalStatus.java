@@ -12,7 +12,10 @@ package com.rental.model;
  * <p>An enum is safer than plain text: only these three values can ever exist.</p>
  */
 public enum RentalStatus {
+    /** Booked: upcoming or currently on the road. */
     ACTIVE,
+    /** The vehicle came back; the rental is finished. */
     RETURNED,
+    /** Cancelled before it finished; dates are free again. */
     CANCELLED
 }

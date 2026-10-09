@@ -73,6 +73,7 @@ public class Car extends Vehicle {
         setSeats(value);
     }
 
+    /** @return the seats (Encapsulation: read-only access to a private field) */
     public int getSeats() {
         return seats;
     }

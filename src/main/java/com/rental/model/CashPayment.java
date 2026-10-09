@@ -80,10 +80,12 @@ public class CashPayment extends Payment {
         setReceivedBy(value);
     }
 
+    /** @return the received by (Encapsulation: read-only access to a private field) */
     public String getReceivedBy() {
         return receivedBy;
     }
 
+    /** Sets the received by (Encapsulation: the only way to change this private field). */
     public void setReceivedBy(String receivedBy) {
         this.receivedBy = ValidationUtil.requireText(receivedBy, "Received by", 40);
     }

@@ -85,18 +85,22 @@ public class Rental implements Storable {
         return id;
     }
 
+    /** @return the customer id (Encapsulation: read-only access to a private field) */
     public String getCustomerId() {
         return customerId;
     }
 
+    /** @return the vehicle id (Encapsulation: read-only access to a private field) */
     public String getVehicleId() {
         return vehicleId;
     }
 
+    /** @return the start date (Encapsulation: read-only access to a private field) */
     public LocalDate getStartDate() {
         return startDate;
     }
 
+    /** @return the end date (Encapsulation: read-only access to a private field) */
     public LocalDate getEndDate() {
         return endDate;
     }
@@ -117,10 +121,12 @@ public class Rental implements Storable {
         this.endDate = endDate;
     }
 
+    /** @return the status (Encapsulation: read-only access to a private field) */
     public RentalStatus getStatus() {
         return status;
     }
 
+    /** Sets the status (Encapsulation: the only way to change this private field). */
     public void setStatus(RentalStatus status) {
         if (status == null) {
             throw new IllegalArgumentException("Rental status is required");

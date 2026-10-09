@@ -91,6 +91,7 @@ public class CardPayment extends Payment {
         setCardLast4(value);
     }
 
+    /** @return the card last4 (Encapsulation: read-only access to a private field) */
     public String getCardLast4() {
         return cardLast4;
     }

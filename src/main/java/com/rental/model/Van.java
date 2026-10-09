@@ -72,6 +72,7 @@ public class Van extends Vehicle {
         setCargoCapacity(value);
     }
 
+    /** @return the cargo capacity (Encapsulation: read-only access to a private field) */
     public int getCargoCapacity() {
         return cargoCapacity;
     }

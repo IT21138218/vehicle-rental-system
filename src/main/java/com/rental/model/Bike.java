@@ -73,6 +73,7 @@ public class Bike extends Vehicle {
         setEngineCC(value);
     }
 
+    /** @return the engine CC (Encapsulation: read-only access to a private field) */
     public int getEngineCC() {
         return engineCC;
     }
