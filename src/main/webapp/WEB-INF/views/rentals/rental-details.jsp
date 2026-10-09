@@ -70,6 +70,28 @@
                 <p class="small text-muted mt-3 mb-0">The final bill (with any late fees) is created by the admin.</p>
             </div>
         </div>
+        <div class="card mt-4">
+            <div class="card-header py-3"><i class="bi bi-receipt me-1"></i>Bill</div>
+            <div class="card-body">
+                <c:choose>
+                    <c:when test="${not empty payment}">
+                        <c:set var="payStatus" value="${payment.status}"/>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="fw-semibold"><c:out value="${payment.id}"/> <%@ include file="/WEB-INF/views/includes/payment-status.jspf" %></div>
+                                <div class="small text-muted">Total Rs. <fmt:formatNumber value="${payment.calculateTotal()}" pattern="#,##0.00"/></div>
+                            </div>
+                            <a href="${ctx}/payments/view?id=${payment.id}" class="btn btn-sm btn-outline-primary">View bill</a>
+                        </div>
+                    </c:when>
+                    <c:when test="${me.canAccessAdminPages() and rental.status != 'CANCELLED'}">
+                        <a href="${ctx}/admin/payments/generate?rentalId=${rental.id}" class="btn btn-primary w-100">
+                            <i class="bi bi-receipt me-1"></i>Generate bill</a>
+                    </c:when>
+                    <c:otherwise><span class="small text-muted">No bill has been generated yet.</span></c:otherwise>
+                </c:choose>
+            </div>
+        </div>
     </div>
 </div>
 

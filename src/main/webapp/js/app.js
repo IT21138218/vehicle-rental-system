@@ -59,7 +59,29 @@
         update();
     });
 
-    // 4. "Confirm password" must equal the password field it points to (data-match="id").
+    // 4. Bill form: the method-specific field ("Received by" / "Card last 4 digits")
+    //    changes its label, pattern and hint when the payment method changes.
+    document.querySelectorAll('select[data-extra-input]').forEach(function (methodSelect) {
+        var input = document.getElementById(methodSelect.dataset.extraInput);
+        var label = document.querySelector('label[for="' + input.id + '"]');
+        var feedback = document.getElementById('extraFeedback');
+        var firstRun = true;
+        function applyMethod() {
+            var option = methodSelect.options[methodSelect.selectedIndex];
+            label.textContent = option.dataset.label;
+            input.pattern = option.dataset.pattern;
+            input.placeholder = option.dataset.placeholder;
+            if (feedback) { feedback.textContent = option.dataset.feedback; }
+            if (!firstRun && !new RegExp('^(?:' + option.dataset.pattern + ')$').test(input.value)) {
+                input.value = '';
+            }
+            firstRun = false;
+        }
+        methodSelect.addEventListener('change', applyMethod);
+        applyMethod();
+    });
+
+    // 5. "Confirm password" must equal the password field it points to (data-match="id").
     function checkMatchingPasswords(form) {
         form.querySelectorAll('[data-match]').forEach(function (confirmInput) {
             var original = document.getElementById(confirmInput.dataset.match);

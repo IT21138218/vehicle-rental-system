@@ -34,6 +34,10 @@
                                 <a class="nav-link ${activeNav == 'rentals' ? 'active' : ''}" href="${ctx}/rentals">
                                     <i class="bi bi-calendar-check me-1"></i>Rentals</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link ${activeNav == 'payments' ? 'active' : ''}" href="${ctx}/payments">
+                                    <i class="bi bi-receipt me-1"></i>Payments</a>
+                            </li>
                         </c:when>
                         <c:otherwise>
                             <li class="nav-item">
@@ -43,6 +47,10 @@
                             <li class="nav-item">
                                 <a class="nav-link ${activeNav == 'rentals' ? 'active' : ''}" href="${ctx}/rentals">
                                     <i class="bi bi-calendar-check me-1"></i>My rentals</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link ${activeNav == 'payments' ? 'active' : ''}" href="${ctx}/payments">
+                                    <i class="bi bi-receipt me-1"></i>My bills</a>
                             </li>
                         </c:otherwise>
                     </c:choose>

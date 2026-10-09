@@ -1,0 +1,6 @@
+<%-- Coloured badge for a payment status. Set ${payStatus} (a PaymentStatus) before including. --%>
+<c:choose>
+    <c:when test="${payStatus == 'PAID'}"><span class="badge text-bg-success">Paid</span></c:when>
+    <c:when test="${payStatus == 'OVERDUE'}"><span class="badge text-bg-danger">Overdue</span></c:when>
+    <c:otherwise><span class="badge text-bg-warning">Pending</span></c:otherwise>
+</c:choose>

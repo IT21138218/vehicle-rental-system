@@ -2,7 +2,9 @@ package com.rental.servlet;
 
 import com.rental.model.AdminUser;
 import com.rental.model.Customer;
+import com.rental.model.PaymentStatus;
 import com.rental.model.RentalStatus;
+import com.rental.service.PaymentService;
 import com.rental.service.RentalService;
 import com.rental.service.UserService;
 import com.rental.service.VehicleService;
@@ -36,6 +38,11 @@ public class AdminDashboardServlet extends BaseServlet {
         RentalService rentalService = getService(RentalService.class);
         request.setAttribute("activeRentalCount", rentalService.countByStatus(RentalStatus.ACTIVE));
         request.setAttribute("returnedRentalCount", rentalService.countByStatus(RentalStatus.RETURNED));
+
+        PaymentService paymentService = getService(PaymentService.class);
+        request.setAttribute("paidTotal", paymentService.totalByStatus(PaymentStatus.PAID));
+        request.setAttribute("unpaidTotal", paymentService.totalByStatus(PaymentStatus.PENDING)
+                + paymentService.totalByStatus(PaymentStatus.OVERDUE));
         render(request, response, "dashboard/admin-dashboard");
     }
 }
