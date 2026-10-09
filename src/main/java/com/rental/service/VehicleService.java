@@ -1,6 +1,8 @@
 package com.rental.service;
 
+import com.rental.model.Rental;
 import com.rental.model.Vehicle;
+import com.rental.repository.RentalRepository;
 import com.rental.repository.VehicleRepository;
 import com.rental.util.IdGenerator;
 import com.rental.util.ValidationUtil;
@@ -30,12 +32,15 @@ public class VehicleService {
     public static final String UNAVAILABLE = "unavailable";
 
     private final VehicleRepository vehicleRepository;
+    private final RentalRepository rentalRepository;
 
     /**
      * @param vehicleRepository where vehicles are stored
+     * @param rentalRepository  used to stop deleting a vehicle that has active bookings
      */
-    public VehicleService(VehicleRepository vehicleRepository) {
+    public VehicleService(VehicleRepository vehicleRepository, RentalRepository rentalRepository) {
         this.vehicleRepository = vehicleRepository;
+        this.rentalRepository = rentalRepository;
     }
 
     /**
@@ -81,12 +86,19 @@ public class VehicleService {
     }
 
     /**
-     * Deletes a vehicle.
+     * Deletes a vehicle. A vehicle with ACTIVE bookings cannot be deleted
+     * (cancel or return those bookings first, or mark the vehicle unavailable).
      *
-     * @throws IllegalArgumentException if the vehicle does not exist
+     * @throws IllegalArgumentException if the vehicle does not exist or still has active bookings
      */
     public void delete(String id) {
         Vehicle vehicle = getExisting(id);
+        for (Rental rental : rentalRepository.findByVehicleId(vehicle.getId())) {
+            if (rental.isActive()) {
+                throw new IllegalArgumentException("Vehicle " + vehicle.getId() + " has active booking "
+                        + rental.getId() + ". Cancel or return it first, or mark the vehicle unavailable.");
+            }
+        }
         vehicleRepository.delete(vehicle.getId());
     }
 

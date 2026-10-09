@@ -1,7 +1,9 @@
 package com.rental.service;
 
 import com.rental.model.Customer;
+import com.rental.model.Rental;
 import com.rental.model.User;
+import com.rental.repository.RentalRepository;
 import com.rental.repository.UserRepository;
 import com.rental.util.IdGenerator;
 
@@ -19,6 +21,7 @@ import java.util.Optional;
  *   <li>Usernames and e-mail addresses must be unique.</li>
  *   <li>New accounts created through registration are always customers.</li>
  *   <li>A user cannot delete their own account, and the last admin cannot be deleted.</li>
+ *   <li>A customer with ACTIVE bookings cannot be deleted.</li>
  * </ul>
  *
  * <p><b>OOP concept - Information hiding:</b> servlets call these methods and never touch
@@ -30,12 +33,15 @@ public class UserService {
     public static final String ID_PREFIX = "U";
 
     private final UserRepository userRepository;
+    private final RentalRepository rentalRepository;
 
     /**
-     * @param userRepository where users are stored
+     * @param userRepository   where users are stored
+     * @param rentalRepository used to stop deleting a customer who has active bookings
      */
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, RentalRepository rentalRepository) {
         this.userRepository = userRepository;
+        this.rentalRepository = rentalRepository;
     }
 
     /**
@@ -169,6 +175,12 @@ public class UserService {
         }
         if (user.canAccessAdminPages() && countAdmins() <= 1) {
             throw new IllegalArgumentException("The last administrator account cannot be deleted");
+        }
+        for (Rental rental : rentalRepository.findByCustomerId(user.getId())) {
+            if (rental.isActive()) {
+                throw new IllegalArgumentException(user.getName() + " has active booking " + rental.getId()
+                        + ". Cancel or return it before deleting the account.");
+            }
         }
         userRepository.delete(user.getId());
     }
