@@ -73,6 +73,20 @@ public abstract class BaseServlet extends HttpServlet {
     }
 
     /**
+     * Sends HTTP 403 (Forbidden) when {@code allowed} is false.
+     * Used with the polymorphic permission methods, e.g.
+     * {@code if (refuseUnless(user.canModifyVehicles(), response)) return;}
+     *
+     * @return true if the request was refused (the servlet should stop)
+     */
+    protected boolean refuseUnless(boolean allowed, HttpServletResponse response) throws IOException {
+        if (!allowed) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN);
+        }
+        return !allowed;
+    }
+
+    /**
      * Copies request parameters into a map so a form can be filled again after an error.
      *
      * @param names the input names to copy
