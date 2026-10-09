@@ -1,0 +1,14 @@
+# Build output
+target/
+out/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Temporary files created during safe writes
+*.tmp
+
+# OS files
+Thumbs.db
+.DS_Store
