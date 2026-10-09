@@ -4,12 +4,14 @@ import com.rental.repository.DataPaths;
 import com.rental.repository.PaymentRepository;
 import com.rental.repository.RentalRepository;
 import com.rental.repository.ReviewRepository;
+import com.rental.repository.StaffRepository;
 import com.rental.repository.UserRepository;
 import com.rental.repository.VehicleRepository;
 import com.rental.service.AuthService;
 import com.rental.service.PaymentService;
 import com.rental.service.RentalService;
 import com.rental.service.ReviewService;
+import com.rental.service.StaffService;
 import com.rental.service.UserService;
 import com.rental.service.VehicleService;
 import jakarta.servlet.ServletContext;
@@ -53,6 +55,7 @@ public class AppContextListener implements ServletContextListener {
         RentalRepository rentalRepository = new RentalRepository(dataFile(RentalRepository.FILE_NAME));
         PaymentRepository paymentRepository = new PaymentRepository(dataFile(PaymentRepository.FILE_NAME));
         ReviewRepository reviewRepository = new ReviewRepository(dataFile(ReviewRepository.FILE_NAME));
+        StaffRepository staffRepository = new StaffRepository(dataFile(StaffRepository.FILE_NAME));
 
         // Services: business rules, used by the servlets
         register(context, new AuthService(userRepository));
@@ -62,6 +65,7 @@ public class AppContextListener implements ServletContextListener {
         register(context, rentalService);
         register(context, new PaymentService(paymentRepository, rentalRepository, vehicleRepository));
         register(context, new ReviewService(reviewRepository, vehicleRepository, rentalService));
+        register(context, new StaffService(staffRepository));
     }
 
     private static Path dataFile(String fileName) {
