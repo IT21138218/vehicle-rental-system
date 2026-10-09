@@ -1,0 +1,12 @@
+CAR,V001,Toyota,Corolla,2021,8500.00,true,5
+CAR,V002,Honda,Civic,2022,9500.00,true,5
+CAR,V003,Toyota,Prius,2020,9000.00,true,5
+CAR,V004,Mitsubishi,Montero,2019,16000.00,true,7
+CAR,V005,Suzuki,Wagon R,2021,5500.00,false,4
+BIKE,V006,Honda,CB Shine,2022,2000.00,true,125
+BIKE,V007,Yamaha,MT-07,2022,4500.00,true,689
+BIKE,V008,Bajaj,Pulsar 150,2021,2200.00,true,150
+BIKE,V009,Kawasaki,Ninja 650,2023,5000.00,false,649
+VAN,V010,Toyota,HiAce,2020,12000.00,true,1200
+VAN,V011,Nissan,Caravan,2019,11000.00,true,1000
+VAN,V012,Suzuki,Every,2022,6500.00,true,350
