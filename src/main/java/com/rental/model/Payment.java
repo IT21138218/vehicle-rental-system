@@ -55,6 +55,28 @@ public abstract class Payment implements Storable {
         setStatus(status);
     }
 
+    /**
+     * Factory method: creates the correct subclass for a payment method.
+     * Used when reading payments.txt and when the admin generates a bill.
+     *
+     * @param method     "CASH" or "CARD"
+     * @param extraValue "received by" for cash, last 4 card digits for card
+     * @return a CashPayment or a CardPayment
+     * @throws IllegalArgumentException for an unknown method
+     */
+    public static Payment create(String method, String id, String rentalId, String customerId,
+                                 LocalDate issueDate, double baseAmount, int lateDays,
+                                 PaymentStatus status, String extraValue) {
+        switch (method == null ? "" : method.trim().toUpperCase()) {
+            case CashPayment.METHOD:
+                return new CashPayment(id, rentalId, customerId, issueDate, baseAmount, lateDays, status, extraValue);
+            case CardPayment.METHOD:
+                return new CardPayment(id, rentalId, customerId, issueDate, baseAmount, lateDays, status, extraValue);
+            default:
+                throw new IllegalArgumentException("Payment method must be CASH or CARD");
+        }
+    }
+
     // ----- Abstract (polymorphic) methods -----
 
     /**
