@@ -85,7 +85,7 @@
         <div class="col-sm-6 col-xl-3">
             <a href="${ctx}/admin/staff?type=${e.key}" class="card stat-card h-100">
                 <div class="card-body d-flex align-items-center gap-3">
-                    <span class="stat-icon"><i class="bi ${e.key == 'DRIVER' ? 'bi-steering-wheel' : 'bi-wrench-adjustable'}"></i></span>
+                    <span class="stat-icon"><i class="bi ${e.key == 'DRIVER' ? 'bi-person-vcard' : 'bi-wrench-adjustable'}"></i></span>
                     <div><div class="stat-value">${e.value}</div><div class="stat-label">${e.key == 'DRIVER' ? 'Drivers' : 'Mechanics'}</div></div>
                 </div>
             </a>

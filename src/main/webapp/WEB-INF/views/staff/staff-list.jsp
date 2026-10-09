@@ -66,7 +66,7 @@
                             <td><c:out value="${s.name}"/></td>
                             <%-- displayRole() and calculateMonthlyPay() are polymorphic --%>
                             <td>
-                                <i class="bi ${s.type == 'DRIVER' ? 'bi-steering-wheel' : 'bi-wrench-adjustable'} text-brand me-1"></i>
+                                <i class="bi ${s.type == 'DRIVER' ? 'bi-person-vcard' : 'bi-wrench-adjustable'} text-brand me-1"></i>
                                 <c:out value="${s.displayRole()}"/>
                             </td>
                             <td class="text-nowrap"><c:out value="${s.phone}"/></td>
