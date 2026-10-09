@@ -46,6 +46,29 @@ public abstract class Vehicle implements Storable {
         setAvailable(available);
     }
 
+    /**
+     * Factory method: creates the correct subclass for a type name.
+     * Used both when reading vehicles.txt and when the admin adds a vehicle.
+     *
+     * @param type      "CAR", "BIKE" or "VAN"
+     * @param specValue seats (car), engine CC (bike) or cargo kg (van)
+     * @return a Car, Bike or Van
+     * @throws IllegalArgumentException for an unknown type
+     */
+    public static Vehicle create(String type, String id, String brand, String model, int year,
+                                 double baseDailyRate, boolean available, int specValue) {
+        switch (type == null ? "" : type.trim().toUpperCase()) {
+            case Car.TYPE:
+                return new Car(id, brand, model, year, baseDailyRate, available, specValue);
+            case Bike.TYPE:
+                return new Bike(id, brand, model, year, baseDailyRate, available, specValue);
+            case Van.TYPE:
+                return new Van(id, brand, model, year, baseDailyRate, available, specValue);
+            default:
+                throw new IllegalArgumentException("Vehicle type must be CAR, BIKE or VAN");
+        }
+    }
+
     // ----- Abstract (polymorphic) methods -----
 
     /**
