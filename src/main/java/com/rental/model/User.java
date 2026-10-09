@@ -43,6 +43,25 @@ public abstract class User implements Storable {
         setEmail(email);
     }
 
+    /**
+     * Factory method: creates the correct subclass for a role.
+     *
+     * @param role "ADMIN" or "CUSTOMER"
+     * @return an AdminUser or a Customer
+     * @throws IllegalArgumentException for an unknown role
+     */
+    public static User create(String role, String id, String username, String password,
+                              String name, String email) {
+        switch (role.trim().toUpperCase()) {
+            case AdminUser.ROLE:
+                return new AdminUser(id, username, password, name, email);
+            case Customer.ROLE:
+                return new Customer(id, username, password, name, email);
+            default:
+                throw new IllegalArgumentException("Unknown user role: " + role);
+        }
+    }
+
     // ----- Abstract (polymorphic) methods -----
 
     /**
