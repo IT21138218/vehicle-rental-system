@@ -38,6 +38,10 @@
                                 <a class="nav-link ${activeNav == 'payments' ? 'active' : ''}" href="${ctx}/payments">
                                     <i class="bi bi-receipt me-1"></i>Payments</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link ${activeNav == 'reviews' ? 'active' : ''}" href="${ctx}/reviews">
+                                    <i class="bi bi-chat-square-text me-1"></i>Reviews</a>
+                            </li>
                         </c:when>
                         <c:otherwise>
                             <li class="nav-item">
@@ -51,6 +55,10 @@
                             <li class="nav-item">
                                 <a class="nav-link ${activeNav == 'payments' ? 'active' : ''}" href="${ctx}/payments">
                                     <i class="bi bi-receipt me-1"></i>My bills</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link ${activeNav == 'reviews' ? 'active' : ''}" href="${ctx}/reviews">
+                                    <i class="bi bi-chat-square-text me-1"></i>My reviews</a>
                             </li>
                         </c:otherwise>
                     </c:choose>

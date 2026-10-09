@@ -53,7 +53,14 @@
                             </div>
                             <h2 class="h5 mb-1"><c:out value="${v.brand} ${v.model}"/></h2>
                             <%-- displayDetails() is polymorphic: each type describes itself --%>
-                            <p class="text-muted small mb-3"><c:out value="${v.displayDetails()}"/></p>
+                            <p class="text-muted small mb-2"><c:out value="${v.displayDetails()}"/></p>
+                            <c:set var="starsValue" value="${averages[v.id]}"/>
+                            <div class="small mb-3">
+                                <c:choose>
+                                    <c:when test="${empty starsValue}"><span class="text-muted">No reviews yet</span></c:when>
+                                    <c:otherwise><%@ include file="/WEB-INF/views/includes/stars.jspf" %> <span class="text-muted">${starsValue}</span></c:otherwise>
+                                </c:choose>
+                            </div>
                             <div class="mt-auto d-flex justify-content-between align-items-end">
                                 <div>
                                     <div class="price">Rs. <fmt:formatNumber value="${v.calculateDailyRate()}" pattern="#,##0"/></div>

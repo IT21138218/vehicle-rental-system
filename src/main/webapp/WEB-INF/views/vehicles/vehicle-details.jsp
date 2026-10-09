@@ -84,4 +84,43 @@
     </div>
 </div>
 
+<div class="card mt-4">
+    <div class="card-header py-3 d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <span><i class="bi bi-chat-square-text me-1"></i>Reviews
+            <c:if test="${not empty average}">
+                <c:set var="starsValue" value="${average}"/>
+                <span class="ms-2"><%@ include file="/WEB-INF/views/includes/stars.jspf" %></span>
+                <span class="fw-normal text-muted small">${average} / 5 (${reviewCount})</span>
+            </c:if>
+        </span>
+        <span class="d-flex gap-2">
+            <c:if test="${not me.canAccessAdminPages()}">
+                <a href="${ctx}/reviews/new?vehicleId=${vehicle.id}" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square me-1"></i>Write a review</a>
+            </c:if>
+            <a href="${ctx}/reviews?vehicleId=${vehicle.id}" class="btn btn-sm btn-outline-secondary">All reviews</a>
+        </span>
+    </div>
+    <c:choose>
+        <c:when test="${empty latestReviews}">
+            <div class="card-body text-muted small">No reviews yet - be the first after your rental.</div>
+        </c:when>
+        <c:otherwise>
+            <ul class="list-group list-group-flush">
+                <c:forEach var="r" items="${latestReviews}">
+                    <c:set var="starsValue" value="${r.rating}"/>
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between">
+                            <span><%@ include file="/WEB-INF/views/includes/stars.jspf" %>
+                                <span class="badge ms-1 ${r.verified ? 'text-bg-success' : 'text-bg-light border'}"><c:out value="${r.displayLabel()}"/></span></span>
+                            <span class="small text-muted"><c:out value="${r.date}"/></span>
+                        </div>
+                        <div class="mt-1"><c:out value="${r.comment}"/></div>
+                        <div class="small text-muted">&mdash; <c:out value="${empty usersById[r.customerId] ? r.customerId : usersById[r.customerId].name}"/></div>
+                    </li>
+                </c:forEach>
+            </ul>
+        </c:otherwise>
+    </c:choose>
+</div>
+
 <%@ include file="/WEB-INF/views/includes/footer.jspf" %>

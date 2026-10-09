@@ -1,5 +1,6 @@
 package com.rental.servlet;
 
+import com.rental.service.ReviewService;
 import com.rental.service.VehicleService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,6 +22,7 @@ public class VehicleBrowseServlet extends BaseServlet {
             throws ServletException, IOException {
         request.setAttribute("vehicles", getService(VehicleService.class).search(
                 request.getParameter("q"), request.getParameter("type"), VehicleService.AVAILABLE));
+        request.setAttribute("averages", getService(ReviewService.class).averageRatings());
         render(request, response, "vehicles/vehicle-browse");
     }
 }
