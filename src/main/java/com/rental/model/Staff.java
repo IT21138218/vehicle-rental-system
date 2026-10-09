@@ -36,6 +36,26 @@ public abstract class Staff implements Storable {
         setDailyWage(dailyWage);
     }
 
+    /**
+     * Factory method: creates the correct subclass for a staff type.
+     *
+     * @param type       "DRIVER" or "MECHANIC"
+     * @param extraValue licence number (driver) or specialization (mechanic)
+     * @return a Driver or a Mechanic
+     * @throws IllegalArgumentException for an unknown type
+     */
+    public static Staff create(String type, String id, String name, String phone,
+                               double dailyWage, String extraValue) {
+        switch (type == null ? "" : type.trim().toUpperCase()) {
+            case Driver.TYPE:
+                return new Driver(id, name, phone, dailyWage, extraValue);
+            case Mechanic.TYPE:
+                return new Mechanic(id, name, phone, dailyWage, extraValue);
+            default:
+                throw new IllegalArgumentException("Staff type must be DRIVER or MECHANIC");
+        }
+    }
+
     // ----- Abstract (polymorphic) methods -----
 
     /**
