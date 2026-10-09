@@ -5,6 +5,15 @@
 (function () {
     'use strict';
 
+    // 0. Success messages disappear after 6 seconds. Errors stay until the user closes them.
+    document.querySelectorAll('.alert-success.alert-dismissible').forEach(function (alert) {
+        setTimeout(function () {
+            if (window.bootstrap && document.body.contains(alert)) {
+                window.bootstrap.Alert.getOrCreateInstance(alert).close();
+            }
+        }, 6000);
+    });
+
     // 1. Bootstrap form validation: forms with class "needs-validation" are checked
     //    with the HTML5 rules (required, min, max, pattern ...) before submitting.
     document.querySelectorAll('form.needs-validation').forEach(function (form) {
