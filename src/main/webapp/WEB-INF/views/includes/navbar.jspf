@@ -26,8 +26,16 @@
                                 <a class="nav-link ${activeNav == 'users' ? 'active' : ''}" href="${ctx}/admin/users">
                                     <i class="bi bi-people me-1"></i>Users</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link ${activeNav == 'vehicles' ? 'active' : ''}" href="${ctx}/admin/vehicles">
+                                    <i class="bi bi-car-front me-1"></i>Vehicles</a>
+                            </li>
                         </c:when>
                         <c:otherwise>
+                            <li class="nav-item">
+                                <a class="nav-link ${activeNav == 'browse' ? 'active' : ''}" href="${ctx}/vehicles">
+                                    <i class="bi bi-search me-1"></i>Browse vehicles</a>
+                            </li>
                         </c:otherwise>
                     </c:choose>
                 </ul>
