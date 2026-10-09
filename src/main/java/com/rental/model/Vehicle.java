@@ -134,22 +134,27 @@ public abstract class Vehicle implements Storable {
         return id;
     }
 
+    /** @return the brand (Encapsulation: read-only access to a private field) */
     public String getBrand() {
         return brand;
     }
 
+    /** Sets the brand (Encapsulation: the only way to change this private field). */
     public void setBrand(String brand) {
         this.brand = ValidationUtil.requireText(brand, "Brand", 30);
     }
 
+    /** @return the model (Encapsulation: read-only access to a private field) */
     public String getModel() {
         return model;
     }
 
+    /** Sets the model (Encapsulation: the only way to change this private field). */
     public void setModel(String model) {
         this.model = ValidationUtil.requireText(model, "Model", 30);
     }
 
+    /** @return the year (Encapsulation: read-only access to a private field) */
     public int getYear() {
         return year;
     }
@@ -161,6 +166,7 @@ public abstract class Vehicle implements Storable {
         this.year = ValidationUtil.requireRange(year, MIN_YEAR, Year.now().getValue() + 1, "Year");
     }
 
+    /** @return the base daily rate (Encapsulation: read-only access to a private field) */
     public double getBaseDailyRate() {
         return baseDailyRate;
     }
@@ -183,6 +189,7 @@ public abstract class Vehicle implements Storable {
         return available;
     }
 
+    /** Sets the available (Encapsulation: the only way to change this private field). */
     public void setAvailable(boolean available) {
         this.available = available;
     }

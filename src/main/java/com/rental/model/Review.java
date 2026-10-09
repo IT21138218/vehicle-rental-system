@@ -103,14 +103,17 @@ public abstract class Review implements Storable {
         return id;
     }
 
+    /** @return the vehicle id (Encapsulation: read-only access to a private field) */
     public String getVehicleId() {
         return vehicleId;
     }
 
+    /** @return the customer id (Encapsulation: read-only access to a private field) */
     public String getCustomerId() {
         return customerId;
     }
 
+    /** @return the rating (Encapsulation: read-only access to a private field) */
     public int getRating() {
         return rating;
     }
@@ -122,10 +125,12 @@ public abstract class Review implements Storable {
         this.rating = ValidationUtil.requireRange(rating, 1, 5, "Rating");
     }
 
+    /** @return the date (Encapsulation: read-only access to a private field) */
     public LocalDate getDate() {
         return date;
     }
 
+    /** Sets the date (Encapsulation: the only way to change this private field). */
     public void setDate(LocalDate date) {
         if (date == null) {
             throw new IllegalArgumentException("Review date is required");
@@ -133,6 +138,7 @@ public abstract class Review implements Storable {
         this.date = date;
     }
 
+    /** @return the comment (Encapsulation: read-only access to a private field) */
     public String getComment() {
         return comment;
     }

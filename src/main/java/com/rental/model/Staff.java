@@ -118,14 +118,17 @@ public abstract class Staff implements Storable {
         return id;
     }
 
+    /** @return the name (Encapsulation: read-only access to a private field) */
     public String getName() {
         return name;
     }
 
+    /** Sets the name (Encapsulation: the only way to change this private field). */
     public void setName(String name) {
         this.name = ValidationUtil.requireText(name, "Name", 60);
     }
 
+    /** @return the phone (Encapsulation: read-only access to a private field) */
     public String getPhone() {
         return phone;
     }
@@ -141,6 +144,7 @@ public abstract class Staff implements Storable {
         this.phone = value;
     }
 
+    /** @return the daily wage (Encapsulation: read-only access to a private field) */
     public double getDailyWage() {
         return dailyWage;
     }

@@ -118,6 +118,7 @@ public abstract class User implements Storable {
         return id;
     }
 
+    /** @return the username (Encapsulation: read-only access to a private field) */
     public String getUsername() {
         return username;
     }
@@ -147,18 +148,22 @@ public abstract class User implements Storable {
         this.password = ValidationUtil.requireText(password, "Password", 30);
     }
 
+    /** @return the name (Encapsulation: read-only access to a private field) */
     public String getName() {
         return name;
     }
 
+    /** Sets the name (Encapsulation: the only way to change this private field). */
     public void setName(String name) {
         this.name = ValidationUtil.requireText(name, "Name", 60);
     }
 
+    /** @return the email (Encapsulation: read-only access to a private field) */
     public String getEmail() {
         return email;
     }
 
+    /** Sets the email (Encapsulation: the only way to change this private field). */
     public void setEmail(String email) {
         this.email = ValidationUtil.requireEmail(email);
     }

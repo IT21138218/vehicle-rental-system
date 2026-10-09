@@ -69,6 +69,7 @@ public class Driver extends Staff {
         setLicenseNumber(value);
     }
 
+    /** @return the license number (Encapsulation: read-only access to a private field) */
     public String getLicenseNumber() {
         return licenseNumber;
     }

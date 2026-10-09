@@ -72,10 +72,12 @@ public class Mechanic extends Staff {
         setSpecialization(value);
     }
 
+    /** @return the specialization (Encapsulation: read-only access to a private field) */
     public String getSpecialization() {
         return specialization;
     }
 
+    /** Sets the specialization (Encapsulation: the only way to change this private field). */
     public void setSpecialization(String specialization) {
         this.specialization = ValidationUtil.requireText(specialization, "Specialization", 30);
     }

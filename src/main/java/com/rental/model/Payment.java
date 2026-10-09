@@ -153,18 +153,22 @@ public abstract class Payment implements Storable {
         return id;
     }
 
+    /** @return the rental id (Encapsulation: read-only access to a private field) */
     public String getRentalId() {
         return rentalId;
     }
 
+    /** @return the customer id (Encapsulation: read-only access to a private field) */
     public String getCustomerId() {
         return customerId;
     }
 
+    /** @return the issue date (Encapsulation: read-only access to a private field) */
     public LocalDate getIssueDate() {
         return issueDate;
     }
 
+    /** @return the base amount (Encapsulation: read-only access to a private field) */
     public double getBaseAmount() {
         return baseAmount;
     }
@@ -176,6 +180,7 @@ public abstract class Payment implements Storable {
         this.baseAmount = roundMoney(ValidationUtil.requirePositive(baseAmount, "Base amount"));
     }
 
+    /** @return the late days (Encapsulation: read-only access to a private field) */
     public int getLateDays() {
         return lateDays;
     }
@@ -187,10 +192,12 @@ public abstract class Payment implements Storable {
         this.lateDays = ValidationUtil.requireRange(lateDays, 0, MAX_LATE_DAYS, "Late days");
     }
 
+    /** @return the status (Encapsulation: read-only access to a private field) */
     public PaymentStatus getStatus() {
         return status;
     }
 
+    /** Sets the status (Encapsulation: the only way to change this private field). */
     public void setStatus(PaymentStatus status) {
         if (status == null) {
             throw new IllegalArgumentException("Payment status is required");

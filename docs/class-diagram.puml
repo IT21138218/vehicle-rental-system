@@ -1,0 +1,386 @@
+@startuml RentRide_Domain_Model
+' Vehicle Rental Service Platform - class diagram
+' Render with the PlantUML plugin in IntelliJ, or at https://www.plantuml.com/plantuml
+
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype ortho
+hide empty members
+
+title RentRide - Diagram 1: Domain model (com.rental.model)
+
+' =====================================================================
+package "com.rental.model" {
+
+  interface Storable <<interface>> {
+    + SEPARATOR : String = ","
+    + getId() : String
+    + toFileString() : String
+  }
+
+  ' ---------------- Users ----------------
+  abstract class User {
+    - id : String
+    - username : String
+    - password : String
+    - name : String
+    - email : String
+    + {static} create(role, id, username, password, name, email) : User
+    + {abstract} getRole() : String
+    + {abstract} canModifyVehicles() : boolean
+    + {abstract} canAccessAdminPages() : boolean
+    + {abstract} getDashboardPath() : String
+    + checkPassword(candidate : String) : boolean
+    + toFileString() : String
+  }
+  class AdminUser {
+    + ROLE : String = "ADMIN"
+    + getRole() : String
+    + canModifyVehicles() : boolean
+    + canAccessAdminPages() : boolean
+    + getDashboardPath() : String
+  }
+  class Customer {
+    + ROLE : String = "CUSTOMER"
+    + getRole() : String
+    + canModifyVehicles() : boolean
+    + canAccessAdminPages() : boolean
+    + getDashboardPath() : String
+  }
+
+  ' ---------------- Vehicles ----------------
+  abstract class Vehicle {
+    - id : String
+    - brand : String
+    - model : String
+    - year : int
+    - baseDailyRate : double
+    - available : boolean
+    + {static} create(type, id, brand, model, year, rate, available, spec) : Vehicle
+    + {abstract} getType() : String
+    + {abstract} calculateDailyRate() : double
+    + {abstract} displayDetails() : String
+    + {abstract} getSpecLabel() : String
+    + {abstract} getSpecValue() : int
+    + {abstract} setSpecValue(value : int)
+    # commonFileFields() : String
+  }
+  class Car {
+    - seats : int
+    + calculateDailyRate() : double
+    + displayDetails() : String
+    + toFileString() : String
+  }
+  class Bike {
+    - engineCC : int
+    + calculateDailyRate() : double
+    + displayDetails() : String
+    + toFileString() : String
+  }
+  class Van {
+    - cargoCapacity : int
+    + RATE_PER_KG : double = 2.0
+    + calculateDailyRate() : double
+    + displayDetails() : String
+    + toFileString() : String
+  }
+
+  ' ---------------- Rentals ----------------
+  enum RentalStatus {
+    ACTIVE
+    RETURNED
+    CANCELLED
+  }
+  class Rental {
+    - id : String
+    - customerId : String
+    - vehicleId : String
+    - startDate : LocalDate
+    - endDate : LocalDate
+    - status : RentalStatus
+    + getDays() : long
+    + overlaps(start : LocalDate, end : LocalDate) : boolean
+    + isActive() : boolean
+    + setDates(start : LocalDate, end : LocalDate)
+    + toFileString() : String
+  }
+
+  ' ---------------- Payments ----------------
+  enum PaymentStatus {
+    PENDING
+    PAID
+    OVERDUE
+  }
+  abstract class Payment {
+    - id : String
+    - rentalId : String
+    - customerId : String
+    - issueDate : LocalDate
+    - baseAmount : double
+    - lateDays : int
+    - status : PaymentStatus
+    + {static} create(method, id, rentalId, customerId, date, base, lateDays, status, extra) : Payment
+    + {abstract} getMethod() : String
+    + {abstract} getLateFee() : double
+    + {abstract} calculateTotal() : double
+    + {abstract} displayMethod() : String
+    + getSurcharge() : double
+  }
+  class CashPayment {
+    - receivedBy : String
+    + LATE_FEE_PER_DAY : double = 1000
+    + getLateFee() : double
+    + calculateTotal() : double
+  }
+  class CardPayment {
+    - cardLast4 : String
+    + LATE_FEE_PER_DAY : double = 1500
+    + SURCHARGE_RATE : double = 0.03
+    + getLateFee() : double
+    + getSurcharge() : double
+    + calculateTotal() : double
+  }
+
+  ' ---------------- Staff ----------------
+  abstract class Staff {
+    - id : String
+    - name : String
+    - phone : String
+    - dailyWage : double
+    + {static} create(type, id, name, phone, wage, extra) : Staff
+    + {abstract} getType() : String
+    + {abstract} displayRole() : String
+    + {abstract} calculateMonthlyPay(workingDays : int) : double
+  }
+  class Driver {
+    - licenseNumber : String
+    + displayRole() : String
+    + calculateMonthlyPay(workingDays : int) : double
+  }
+  class Mechanic {
+    - specialization : String
+    + displayRole() : String
+    + calculateMonthlyPay(workingDays : int) : double
+  }
+
+  ' ---------------- Reviews ----------------
+  abstract class Review {
+    - id : String
+    - vehicleId : String
+    - customerId : String
+    - rating : int
+    - date : LocalDate
+    - comment : String
+    + {static} create(type, id, vehicleId, customerId, rating, date, comment) : Review
+    + {abstract} getType() : String
+    + {abstract} displayLabel() : String
+    + {abstract} isVerified() : boolean
+  }
+  class PublicReview {
+    + displayLabel() : String
+    + isVerified() : boolean
+  }
+  class VerifiedReview {
+    + displayLabel() : String
+    + isVerified() : boolean
+  }
+}
+
+Storable <|.. User
+Storable <|.. Vehicle
+Storable <|.. Rental
+Storable <|.. Payment
+Storable <|.. Staff
+Storable <|.. Review
+
+User <|-- AdminUser
+User <|-- Customer
+Vehicle <|-- Car
+Vehicle <|-- Bike
+Vehicle <|-- Van
+Payment <|-- CashPayment
+Payment <|-- CardPayment
+Staff <|-- Driver
+Staff <|-- Mechanic
+Review <|-- PublicReview
+Review <|-- VerifiedReview
+
+Rental --> RentalStatus
+Payment --> PaymentStatus
+Rental ..> Customer : customerId
+Rental ..> Vehicle : vehicleId
+Payment ..> Rental : rentalId
+Review ..> Vehicle : vehicleId
+Review ..> Customer : customerId
+
+@enduml
+
+@startuml RentRide_Architecture
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype ortho
+hide empty members
+
+title RentRide - Diagram 2: Layers (repository, service, servlet)
+
+' Model types used below (full details in Diagram 1)
+package "com.rental.model" {
+  interface Storable <<interface>>
+  abstract class User
+}
+
+' =====================================================================
+package "com.rental.repository" {
+  interface "Repository<T extends Storable>" as Repository <<interface>> {
+    + add(item : T)
+    + findById(id : String) : Optional<T>
+    + findAll() : List<T>
+    + update(item : T) : boolean
+    + delete(id : String) : boolean
+  }
+  class FileHandler {
+    - filePath : Path
+    + readLines() : List<String> {synchronized}
+    + writeLines(lines : List<String>) {synchronized}
+    - ensureFileExists()
+  }
+  abstract class "AbstractFileRepository<T>" as AbstractFileRepository {
+    - fileHandler : FileHandler
+    # {abstract} parse(fields : String[]) : T
+    # splitLimit() : int
+    # {static} parseBoolean(text : String) : boolean
+    - saveAll(items : List<T>)
+  }
+  class DataPaths {
+    + {static} getDataDir() : Path
+    + {static} file(name : String) : Path
+    + {static} seedIfMissing(seedDir : Path)
+  }
+  class UserRepository {
+    + findByUsername(username : String) : Optional<User>
+  }
+  class VehicleRepository
+  class RentalRepository {
+    + findByVehicleId(id : String) : List<Rental>
+    + findByCustomerId(id : String) : List<Rental>
+  }
+  class PaymentRepository {
+    + findByRentalId(id : String) : Optional<Payment>
+  }
+  class ReviewRepository {
+    # splitLimit() : int = 7
+    + findByVehicleId(id : String) : List<Review>
+  }
+  class StaffRepository
+}
+
+Repository <|.. AbstractFileRepository
+AbstractFileRepository *-- FileHandler
+AbstractFileRepository <|-- UserRepository
+AbstractFileRepository <|-- VehicleRepository
+AbstractFileRepository <|-- RentalRepository
+AbstractFileRepository <|-- PaymentRepository
+AbstractFileRepository <|-- ReviewRepository
+AbstractFileRepository <|-- StaffRepository
+
+' =====================================================================
+package "com.rental.service" {
+  class AuthService {
+    + login(username, password) : Optional<User>
+  }
+  class UserService {
+    + register(username, password, name, email) : Customer
+    + search(keyword, role) : List<User>
+    + updateProfile(...) : User
+    + updateByAdmin(...) : User
+    + delete(userId, currentUserId)
+  }
+  class VehicleService {
+    + add(...) : Vehicle
+    + update(...) : Vehicle
+    + delete(id)
+    + search(keyword, type, availability) : List<Vehicle>
+  }
+  class RentalService {
+    + MAX_DAYS : int = 30
+    + book(customer, vehicleId, start, end) : Rental
+    + modifyDates(rentalId, user, start, end) : Rental
+    + cancel(rentalId, user) : Rental
+    + markReturned(rentalId) : Rental
+    + estimateCost(rental) : double
+    + hasReturnedRental(customerId, vehicleId) : boolean
+  }
+  class PaymentService {
+    + generate(rentalId, method, lateDays, extra) : Payment
+    + update(paymentId, status, lateDays, extra) : Payment
+    + delete(paymentId)
+    + totalByStatus(status) : double
+  }
+  class ReviewService {
+    + submit(user, vehicleId, rating, comment) : Review
+    + update(reviewId, user, rating, comment) : Review
+    + delete(reviewId, user) : Review
+    + averageRatings() : Map<String, Double>
+  }
+  class StaffService {
+    + add(...) : Staff
+    + update(...) : Staff
+    + delete(id)
+    + search(keyword, type) : List<Staff>
+  }
+}
+
+AuthService --> UserRepository
+UserService --> UserRepository
+UserService --> RentalRepository
+VehicleService --> VehicleRepository
+VehicleService --> RentalRepository
+RentalService --> RentalRepository
+RentalService --> VehicleRepository
+PaymentService --> PaymentRepository
+PaymentService --> RentalRepository
+PaymentService --> VehicleRepository
+ReviewService --> ReviewRepository
+ReviewService --> RentalService
+StaffService --> StaffRepository
+
+' =====================================================================
+package "com.rental.servlet / filter / util" {
+  abstract class BaseServlet {
+    + SESSION_USER : String
+    # getService(type : Class<T>) : T
+    # currentUser(request) : User
+    # render(request, response, view)
+    # redirect(request, response, path)
+    # refuseUnless(allowed, response) : boolean
+    # formFromRequest(request, names...) : Map
+  }
+  class "LoginServlet, RegisterServlet, ...\n(34 servlets, one per action)" as Servlets
+  class AppContextListener {
+    + contextInitialized(event)
+  }
+  class AuthFilter {
+    + doFilter(request, response, chain)
+  }
+  class IdGenerator {
+    + {static} next(prefix, existingIds) : String
+  }
+  class ValidationUtil
+  class FlashUtil
+}
+
+BaseServlet <|-- Servlets
+Servlets ..> AuthService
+Servlets ..> UserService
+Servlets ..> VehicleService
+Servlets ..> RentalService
+Servlets ..> PaymentService
+Servlets ..> ReviewService
+Servlets ..> StaffService
+AuthFilter ..> User : canAccessAdminPages()
+AppContextListener ..> DataPaths
+AppContextListener ..> AuthService : creates
+
+@enduml
