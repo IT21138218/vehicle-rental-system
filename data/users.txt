@@ -1,0 +1,12 @@
+U001,ADMIN,admin,admin123,System Administrator,admin@rentride.lk
+U002,ADMIN,manager,manager123,Fleet Manager,manager@rentride.lk
+U003,CUSTOMER,nimal,pass123,Nimal Perera,nimal.perera@gmail.com
+U004,CUSTOMER,kasun,pass123,Kasun Jayasuriya,kasun.j@gmail.com
+U005,CUSTOMER,dilini,pass123,Dilini Fernando,dilini.f@yahoo.com
+U006,CUSTOMER,tharindu,pass123,Tharindu Wickramasinghe,tharindu.w@gmail.com
+U007,CUSTOMER,sachini,pass123,Sachini Rathnayake,sachini.r@outlook.com
+U008,CUSTOMER,chamara,pass123,Chamara Bandara,chamara.b@gmail.com
+U009,CUSTOMER,amaya,pass123,Amaya Gunawardena,amaya.g@gmail.com
+U010,CUSTOMER,pradeep,pass123,Pradeep Kumara,pradeep.k@yahoo.com
+U011,CUSTOMER,ishara,pass123,Ishara Senanayake,ishara.s@gmail.com
+U012,CUSTOMER,ravindu,pass123,Ravindu Dissanayake,ravindu.d@outlook.com
