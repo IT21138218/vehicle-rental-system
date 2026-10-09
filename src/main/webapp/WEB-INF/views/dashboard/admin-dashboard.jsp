@@ -81,6 +81,16 @@
             </div>
         </a>
     </div>
+    <c:forEach var="e" items="${staffTypeCounts}">
+        <div class="col-sm-6 col-xl-3">
+            <a href="${ctx}/admin/staff?type=${e.key}" class="card stat-card h-100">
+                <div class="card-body d-flex align-items-center gap-3">
+                    <span class="stat-icon"><i class="bi ${e.key == 'DRIVER' ? 'bi-steering-wheel' : 'bi-wrench-adjustable'}"></i></span>
+                    <div><div class="stat-value">${e.value}</div><div class="stat-label">${e.key == 'DRIVER' ? 'Drivers' : 'Mechanics'}</div></div>
+                </div>
+            </a>
+        </div>
+    </c:forEach>
 </div>
 
 <div class="card">
@@ -91,6 +101,7 @@
         <a href="${ctx}/admin/vehicles" class="btn btn-outline-primary"><i class="bi bi-car-front me-1"></i>Manage fleet</a>
         <a href="${ctx}/rentals" class="btn btn-outline-primary"><i class="bi bi-calendar-check me-1"></i>Manage rentals</a>
         <a href="${ctx}/admin/payments/generate" class="btn btn-outline-primary"><i class="bi bi-receipt me-1"></i>Generate bill</a>
+        <a href="${ctx}/admin/staff/add" class="btn btn-outline-primary"><i class="bi bi-person-plus me-1"></i>Add staff</a>
     </div>
 </div>
 

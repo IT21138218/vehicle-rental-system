@@ -6,6 +6,7 @@ import com.rental.model.PaymentStatus;
 import com.rental.model.RentalStatus;
 import com.rental.service.PaymentService;
 import com.rental.service.RentalService;
+import com.rental.service.StaffService;
 import com.rental.service.UserService;
 import com.rental.service.VehicleService;
 import jakarta.servlet.ServletException;
@@ -43,6 +44,7 @@ public class AdminDashboardServlet extends BaseServlet {
         request.setAttribute("paidTotal", paymentService.totalByStatus(PaymentStatus.PAID));
         request.setAttribute("unpaidTotal", paymentService.totalByStatus(PaymentStatus.PENDING)
                 + paymentService.totalByStatus(PaymentStatus.OVERDUE));
+        request.setAttribute("staffTypeCounts", getService(StaffService.class).countByType());
         render(request, response, "dashboard/admin-dashboard");
     }
 }
