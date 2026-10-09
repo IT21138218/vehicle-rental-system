@@ -70,7 +70,7 @@
                 <ul class="navbar-nav align-items-lg-center">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person-circle me-1"></i><c:out value="${me.name}"/>
+                            <span class="avatar me-1"><c:out value="${fn:substring(me.name, 0, 1)}"/></span><c:out value="${me.name}"/>
                             <span class="role-pill ms-1"><c:out value="${me.role}"/></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
