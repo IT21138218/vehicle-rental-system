@@ -74,7 +74,16 @@ a:hover { color: var(--brand-dark); }
 .app-navbar .nav-link {
     color: rgba(255, 255, 255, .72);
     border-radius: 8px;
-    padding: .45rem .8rem !important;
+    padding: .45rem .6rem !important;
+    white-space: nowrap; /* keep icon and label on one line */
+}
+
+/* Seven admin links + user menu: slightly smaller text on medium-large screens */
+@media (min-width: 992px) and (max-width: 1399.98px) {
+    .app-navbar .nav-link {
+        font-size: .9rem;
+        padding: .45rem .5rem !important;
+    }
 }
 
 .app-navbar .nav-link:hover,
