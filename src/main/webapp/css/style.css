@@ -256,6 +256,14 @@ a { text-underline-offset: .18em; }
 
 /* Collapsed menu on phones: the capsule becomes a rounded sheet */
 @media (max-width: 991.98px) {
+    .app-navbar .navbar-collapse {
+        padding: .5rem 0 .6rem;
+    }
+
+    .app-navbar .nav-link {
+        padding: .65rem .9rem !important;
+    }
+
     .app-navbar > .container {
         border-radius: var(--r-surface);
         margin-left: .75rem;
@@ -386,6 +394,14 @@ a:focus-visible {
     box-shadow: 0 0 0 .22rem rgba(26, 140, 138, .18);
 }
 
+.input-group-text {
+    border-radius: var(--r-control);
+    border-color: rgba(16, 35, 42, .12);
+    background: rgba(255, 255, 255, .55);
+    color: var(--ink-muted);
+    font-weight: 500;
+}
+
 /* ---------- 8. Segmented control (status tabs) ---------- */
 .nav-pills {
     display: inline-flex;
@@ -499,6 +515,24 @@ a.stat-card:hover {
         0 22px 44px -18px rgba(14, 70, 84, .42),
         0 2px 6px rgba(14, 70, 84, .06);
 }
+
+/* Group headings on the dashboard */
+.section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink-muted);
+    letter-spacing: 0;
+    margin: 0 0 .75rem .25rem;
+}
+
+/* The one tile that matters most (money collected) gets a teal wash */
+.stat-card-lead {
+    background:
+        linear-gradient(150deg, rgba(26, 140, 138, .20), rgba(255, 255, 255, .50) 70%),
+        var(--glass-fill);
+}
+
+.stat-card .stat-value { white-space: nowrap; }
 
 /* ---------- 12. Empty states ---------- */
 .empty-state {
