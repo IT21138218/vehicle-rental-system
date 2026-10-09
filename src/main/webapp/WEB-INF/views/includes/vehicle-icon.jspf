@@ -1,0 +1,6 @@
+<%-- Icon for a vehicle type. Set ${iconType} ("CAR", "BIKE" or "VAN") before including. --%>
+<c:choose>
+    <c:when test="${iconType == 'CAR'}"><i class="bi bi-car-front"></i></c:when>
+    <c:when test="${iconType == 'BIKE'}"><i class="bi bi-scooter"></i></c:when>
+    <c:otherwise><i class="bi bi-truck"></i></c:otherwise>
+</c:choose>

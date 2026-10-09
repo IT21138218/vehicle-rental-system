@@ -3,6 +3,7 @@ package com.rental.servlet;
 import com.rental.model.AdminUser;
 import com.rental.model.Customer;
 import com.rental.service.UserService;
+import com.rental.service.VehicleService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,6 +25,11 @@ public class AdminDashboardServlet extends BaseServlet {
         UserService userService = getService(UserService.class);
         request.setAttribute("customerCount", userService.countByRole(Customer.ROLE));
         request.setAttribute("adminCount", userService.countByRole(AdminUser.ROLE));
+
+        VehicleService vehicleService = getService(VehicleService.class);
+        request.setAttribute("vehicleCount", vehicleService.findAll().size());
+        request.setAttribute("availableVehicleCount", vehicleService.countAvailable());
+        request.setAttribute("vehicleTypeCounts", vehicleService.countByType());
         render(request, response, "dashboard/admin-dashboard");
     }
 }

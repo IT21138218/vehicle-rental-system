@@ -14,6 +14,7 @@
 <div class="card">
     <div class="card-header py-3">Quick actions</div>
     <div class="card-body d-flex flex-wrap gap-2">
+        <a href="${ctx}/vehicles" class="btn btn-primary"><i class="bi bi-search me-1"></i>Browse vehicles</a>
         <a href="${ctx}/profile" class="btn btn-outline-primary"><i class="bi bi-person-gear me-1"></i>Edit my profile</a>
     </div>
 </div>

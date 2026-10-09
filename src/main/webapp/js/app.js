@@ -18,7 +18,27 @@
         });
     });
 
-    // 2. "Confirm password" must equal the password field it points to (data-match="id").
+    // 2. Vehicle form: the type-specific field (seats / engine CC / cargo kg) changes its
+    //    label and limits when another vehicle type is chosen.
+    document.querySelectorAll('select[data-spec-input]').forEach(function (typeSelect) {
+        var specInput = document.getElementById(typeSelect.dataset.specInput);
+        var label = document.querySelector('label[for="' + specInput.id + '"]');
+        var feedback = document.getElementById('specFeedback');
+        function applyType() {
+            var option = typeSelect.options[typeSelect.selectedIndex];
+            label.textContent = option.dataset.label;
+            specInput.min = option.dataset.min;
+            specInput.max = option.dataset.max;
+            if (feedback) {
+                feedback.textContent = option.dataset.label + ' must be between '
+                    + option.dataset.min + ' and ' + option.dataset.max + '.';
+            }
+        }
+        typeSelect.addEventListener('change', applyType);
+        applyType();
+    });
+
+    // 3. "Confirm password" must equal the password field it points to (data-match="id").
     function checkMatchingPasswords(form) {
         form.querySelectorAll('[data-match]').forEach(function (confirmInput) {
             var original = document.getElementById(confirmInput.dataset.match);
