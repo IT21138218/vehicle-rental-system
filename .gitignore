@@ -4,6 +4,7 @@ out/
 
 # IntelliJ IDEA
 .idea/
+.vscode/
 *.iml
 
 # Temporary files created during safe writes
