@@ -53,6 +53,24 @@ public abstract class AbstractFileRepository<T extends Storable> implements Repo
     protected abstract T parse(String[] fields);
 
     /**
+     * Reads "true" or "false" from a file field. Unlike {@link Boolean#parseBoolean(String)},
+     * any other text is treated as a malformed line instead of silently becoming false.
+     *
+     * @param text the field value
+     * @return the boolean value
+     * @throws IllegalArgumentException if the text is not "true" or "false"
+     */
+    protected static boolean parseBoolean(String text) {
+        if ("true".equalsIgnoreCase(text.trim())) {
+            return true;
+        }
+        if ("false".equalsIgnoreCase(text.trim())) {
+            return false;
+        }
+        throw new IllegalArgumentException("expected true or false but found " + text);
+    }
+
+    /**
      * How many pieces to split each line into. The default (-1) splits on every comma.
      * A repository whose LAST field is free text (like a review comment) overrides this,
      * so commas inside that text are kept.
