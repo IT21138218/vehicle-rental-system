@@ -3,14 +3,20 @@
 <c:set var="pageTitle" value="Create account"/>
 <%@ include file="/WEB-INF/views/includes/header.jspf" %>
 
-<div class="auth-wrapper" style="max-width: 520px;">
-    <div class="text-center mb-4">
-        <h1 class="h3 auth-title">Create your account</h1>
-        <p class="text-muted mb-0">Register as a customer to start renting.</p>
-    </div>
+<div class="auth-layout">
+    <section class="auth-intro">
+        <h1>Create your account.</h1>
+        <p>Registering takes a minute. You can book straight away.</p>
+        <ul class="auth-points">
+            <li><i class="bi bi-search"></i><span>Search the fleet by brand, model or type.</span></li>
+            <li><i class="bi bi-calendar-event"></i><span>Change or cancel your bookings whenever you need to.</span></li>
+            <li><i class="bi bi-chat-square-text"></i><span>Review the vehicles you rented to help other customers.</span></li>
+        </ul>
+    </section>
 
+    <section class="auth-card" style="max-width: 520px;">
     <div class="card">
-        <div class="card-body p-4">
+        <div class="card-body">
             <form action="${pageContext.request.contextPath}/register" method="post" class="needs-validation" novalidate>
                 <div class="mb-3">
                     <label for="name" class="form-label">Full name</label>
@@ -46,7 +52,7 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">
-                    <i class="bi bi-person-plus me-1"></i>Create account
+                    Create account
                 </button>
             </form>
         </div>
@@ -55,6 +61,7 @@
     <p class="text-center mt-3">
         Already registered? <a href="${pageContext.request.contextPath}/login">Log in</a>
     </p>
+    </section>
 </div>
 
 <%@ include file="/WEB-INF/views/includes/footer.jspf" %>
