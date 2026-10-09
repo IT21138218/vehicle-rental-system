@@ -38,7 +38,28 @@
         applyType();
     });
 
-    // 3. "Confirm password" must equal the password field it points to (data-match="id").
+    // 3. Booking form: live cost estimate = days x daily rate (the server re-calculates it).
+    document.querySelectorAll('form[data-cost-estimate]').forEach(function (form) {
+        var rate = parseFloat(form.dataset.dailyRate) || 0;
+        var start = form.querySelector('[name="startDate"]');
+        var end = form.querySelector('[name="endDate"]');
+        function update() {
+            var days = 0;
+            if (start.value && end.value) {
+                days = Math.round((Date.parse(end.value) - Date.parse(start.value)) / 86400000);
+            }
+            end.setCustomValidity(start.value && end.value && days <= 0 ? 'End date must be after the start date' : '');
+            days = Math.max(days, 0);
+            document.getElementById('estimateDays').textContent = days;
+            document.getElementById('estimateTotal').textContent = (days * rate)
+                .toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        }
+        start.addEventListener('change', update);
+        end.addEventListener('change', update);
+        update();
+    });
+
+    // 4. "Confirm password" must equal the password field it points to (data-match="id").
     function checkMatchingPasswords(form) {
         form.querySelectorAll('[data-match]').forEach(function (confirmInput) {
             var original = document.getElementById(confirmInput.dataset.match);
