@@ -1,0 +1,12 @@
+VERIFIED,RV001,V001,U003,5,2026-08-06,Clean car, smooth drive and very economical on fuel.
+VERIFIED,RV002,V007,U004,4,2026-08-13,Powerful bike, great for a weekend ride to Ella. Seat is a bit hard.
+VERIFIED,RV003,V010,U005,5,2026-08-19,Perfect for our family trip, plenty of space for luggage.
+VERIFIED,RV004,V006,U003,4,2026-09-05,Light and easy to ride in Colombo traffic, good mileage.
+VERIFIED,RV005,V002,U006,5,2026-09-11,Comfortable, quiet and the pickup was on time.
+VERIFIED,RV006,V004,U007,3,2026-09-16,Great 4x4 for the hills, but fuel costs add up quickly.
+PUBLIC,RV007,V011,U008,3,2026-09-21,Had to cancel my trip, but the booking process was easy.
+PUBLIC,RV008,V003,U009,4,2026-10-08,Picked it up today, looks very well maintained.
+PUBLIC,RV009,V001,U010,4,2026-09-28,A friend rented this one and recommended it highly.
+PUBLIC,RV010,V002,U011,5,2026-09-30,Looks brand new, staff were friendly and helpful.
+PUBLIC,RV011,V007,U012,4,2026-10-01,Staff answered all my questions about the MT-07, booking soon.
+PUBLIC,RV012,V010,U004,4,2026-10-02,Spacious van, the rates are fair for groups of 10 or more.
